@@ -1,10 +1,10 @@
 //+------------------------------------------------------------------+
 //|                                                         10AO.mq4 |
-//|                        Copyright 2013, MetaQuotes Software Corp. |
-//|                                        http://www.metaquotes.net |
+//|                                                    server kabure |
+//|                                              http://www.svka.com |
 //+------------------------------------------------------------------+
-#property copyright "Copyright 2013, MetaQuotes Software Corp."
-#property link      "http://www.metaquotes.net"
+#property copyright "server kabure"
+#property link      "http://www.svka.com"
 //---- indicator settings
 #property   indicator_separate_window
 

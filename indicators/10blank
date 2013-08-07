@@ -1,0 +1,76 @@
+//+------------------------------------------------------------------+
+//|                                                      10blank.mq4 |
+//|                                                               sk |
+//|                                                http://www.sk.net |
+//+------------------------------------------------------------------+
+#property copyright "sk"
+#property link      "http://www.sk.net"
+
+#property indicator_separate_window
+//+------------------------------------------------------------------+
+//| Custom indicator initialization function                         |
+//+------------------------------------------------------------------+
+int init()
+  {
+//---- indicators
+//----
+   return(0);
+  }
+//+------------------------------------------------------------------+
+//| Custom indicator deinitialization function                       |
+//+------------------------------------------------------------------+
+int deinit()
+  {
+//----
+   
+//----
+   return(0);
+  }
+//+------------------------------------------------------------------+
+//| Custom indicator iteration function                              |
+//+------------------------------------------------------------------+
+int start()
+  {
+   int    counted_bars=IndicatorCounted();
+   string sort;
+//----
+   double ema62, sma200, sma800;
+   for(int i=Bars-counted_bars;i>=0;i--){
+      ema62=iMA(NULL,0,62,0,MODE_EMA,PRICE_CLOSE,i);
+      sma200=iMA(NULL,0,200,0,MODE_SMA,PRICE_CLOSE,i);
+      sma800=iMA(NULL,0,800,0,MODE_SMA,PRICE_CLOSE,i);
+      sort=comment_sort(ema62, sma200, sma800);
+      Comment(
+         sort, "\n",
+         "62ema=", ema62, "\n",
+         "200sma=", sma200, "\n",
+         "800sma=", sma800
+      );
+   }
+//----
+   return(0);
+  }
+//+------------------------------------------------------------------+
+
+string comment_sort(double ema62, double sma200, double sma800){
+   string sort;
+   double num_array[3];
+   num_array[0]=ema62;
+   num_array[1]=sma200;
+   num_array[2]=sma800;
+   ArraySort(num_array,WHOLE_ARRAY,0,MODE_DESCEND);
+   //left
+   if(num_array[0]==ema62) sort="[62ema]";
+   if(num_array[0]==sma200) sort="[200sma]";
+   if(num_array[0]==sma800) sort="[800sma]";
+   //center
+   if(num_array[1]==ema62) sort=sort+"-[62ema]";
+   if(num_array[1]==sma200) sort=sort+"-[200sma]";
+   if(num_array[1]==sma800) sort=sort+"-[800sma]";
+   //right
+   if(num_array[2]==ema62) sort=sort+"-[62ema]";
+   if(num_array[2]==sma200) sort=sort+"-[200sma]";
+   if(num_array[2]==sma800) sort=sort+"-[800sma]";
+   
+   return(sort);
+}
